@@ -1,6 +1,6 @@
 ﻿using System;
 using ASPFinal.Areas.Identity.Data;
-using ASPFinal.Data;
+using ASPFinal.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
@@ -16,12 +16,12 @@ namespace ASPFinal.Areas.Identity
         public void Configure(IWebHostBuilder builder)
         {
             builder.ConfigureServices((context, services) => {
-                services.AddDbContext<BankContext>(options =>
+                services.AddDbContext<AppDbContext>(options =>
                     options.UseSqlServer(
                         context.Configuration.GetConnectionString("BankContextConnection")));
 
                 services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
-                    .AddEntityFrameworkStores<BankContext>();
+                    .AddEntityFrameworkStores<AppDbContext>();
             });
         }
     }
